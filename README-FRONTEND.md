@@ -46,14 +46,21 @@ pnpm dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the animated UI.
 
+## Important Note on node_modules
+
+- The `node_modules` directory is automatically created when you run `npm install` and contains all the project dependencies
+- This directory is **large** (often hundreds of MB) and should **never** be committed to version control
+- The `.gitignore` file is configured to exclude `node_modules/` from Git
+- If you encounter Git issues with large files, ensure node_modules is completely removed from your Git history
+
 ## Frontend Features
 
 - **Animated Background**: Beautiful particle animations in the background
 - **Animated Text**: Text that animates in with staggered animation
 - **URL Input Fields**: Clean form for entering product and client URLs
 - **Email Generation**: Integration with backend API for email generation
-- **Results Page**: Well-formatted display of generated emails
-- **Theme Switching**: Dark/light mode support
+- **Results Page**: Well-formatted display of generated emails with copy functionality
+- **Theme Switching**: Dark/light mode support via next-themes
 - **Responsive Design**: Works on mobile, tablet, and desktop
 - **Copy to Clipboard**: Easily copy generated emails
 - **Beautiful Typography**: Enhanced text formatting with proper spacing
@@ -67,7 +74,7 @@ The email output page has been improved with:
 - **Line Breaks**: Preserved line breaks within paragraphs
 - **Typography**: Enhanced typography using Tailwind Typography
 - **Copy Button**: One-click copy functionality for the entire email
-- **Animations**: Smooth text reveal animations
+- **Animations**: Smooth text reveal animations using Framer Motion
 - **Responsive Layout**: Proper formatting on all screen sizes
 
 ## Integrating with the Backend
@@ -109,6 +116,30 @@ export async function generateEmail(productUrl: string, clientUrl: string): Prom
 }
 ```
 
+## Development Notes
+
+### Key Dependencies
+
+- **Next.js**: React framework for production
+- **React**: UI library
+- **Framer Motion**: Animation library
+- **Tailwind CSS**: Utility-first CSS framework
+- **next-themes**: Theme switching functionality
+- **Lucide React**: Icon library
+- **Radix UI**: Accessible UI components
+
+### Build and Deployment
+
+To build the application for production:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The build artifacts will be stored in the `.next/` directory, which should also not be committed to version control.
+
 ## Running the Complete Application
 
 1. Start the Python backend API server:
@@ -130,4 +161,6 @@ npm run dev
 
 - **API Connection Issues**: Ensure the Flask server is running on port 5001
 - **Port Conflicts**: Check if port 5001 is available; change in `api_server.py` if needed
-- **Visualization Errors**: The backend uses a non-GUI matplotlib backend to avoid display issues 
+- **Visualization Errors**: The backend uses a non-GUI matplotlib backend to avoid display issues
+- **Missing Dependencies**: If you encounter errors about missing modules, run `npm install` again
+- **Large File Git Issues**: If you encounter GitHub rejection due to large files, see the "Important Note on node_modules" section 
