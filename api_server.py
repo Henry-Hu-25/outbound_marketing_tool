@@ -4,29 +4,32 @@ import main
 import traceback
 import logging
 import sys
+import os
 
-# Set up logging
+# Set up logging - change level to INFO to reduce verbosity
 logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO,  # Changed from DEBUG to INFO
+    format='%(asctime)s - %(levelname)s - %(message)s',  # Simplified format
     handlers=[
         logging.StreamHandler(sys.stdout)
     ]
 )
 logger = logging.getLogger(__name__)
 
+# Disable noisy loggers
+logging.getLogger('werkzeug').setLevel(logging.WARNING)
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
+
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})  # Allow all origins for /api/ routes
 
 @app.route('/api/generate-email', methods=['POST'])
 def generate_email():
-    logger.info(f"Received request: {request.method} {request.path}")
-    logger.debug(f"Headers: {dict(request.headers)}")
+    logger.info(f"Processing email generation request")
     
     try:
         # Get request data
         data = request.get_json()
-        logger.info(f"Request data: {data}")
         
         if not data:
             logger.error("No JSON data in request")
@@ -38,8 +41,6 @@ def generate_email():
         product_url = data.get('product_url')
         client_url = data.get('client_url')
         
-        logger.info(f"Processing request with product_url={product_url}, client_url={client_url}")
-        
         # Validate input
         if not product_url or not client_url:
             logger.error("Missing required parameters")
@@ -49,13 +50,25 @@ def generate_email():
             }), 400
         
         # Call the main function with the provided URLs
-        logger.info("Calling main.main with URLs")
         try:
+            # Create a quiet environment for main.py execution
+            original_stdout = sys.stdout
+            sys.stdout = open(os.devnull, 'w')  # Redirect stdout to null
+            
             email_content = main.main(product_url=product_url, client_url=client_url)
+            
+            # Restore stdout
+            sys.stdout.close()
+            sys.stdout = original_stdout
+            
             logger.info("Successfully generated email content")
         except Exception as e:
-            logger.error(f"Error in main.main: {str(e)}")
-            logger.error(traceback.format_exc())
+            # Restore stdout if exception occurred
+            if sys.stdout != original_stdout:
+                sys.stdout.close()
+                sys.stdout = original_stdout
+                
+            logger.error(f"Error in email generation: {str(e)}")
             return jsonify({
                 'status': 'error',
                 'message': f"Error in email generation: {str(e)}"
@@ -68,7 +81,6 @@ def generate_email():
         })
     except Exception as e:
         logger.error(f"Unhandled error: {str(e)}")
-        logger.error(traceback.format_exc())
         return jsonify({
             'status': 'error',
             'message': str(e)
@@ -85,16 +97,12 @@ def health_check():
 # For debugging - simple test endpoint
 @app.route('/api/test', methods=['GET', 'POST'])
 def test_endpoint():
-    logger.info(f"Test endpoint called: {request.method}")
     return jsonify({
         'status': 'success',
-        'message': 'Test endpoint working',
-        'method': request.method,
-        'headers': dict(request.headers),
-        'data': request.get_json() if request.is_json else None
+        'message': 'Test endpoint working'
     })
 
 if __name__ == '__main__':
     PORT = 5001
     logger.info(f"Starting API server on port {PORT}")
-    app.run(debug=True, port=PORT, host='0.0.0.0') 
+    app.run(debug=False, port=PORT, host='0.0.0.0') 
