@@ -1,0 +1,13 @@
+langchain-groq
+langchain-community
+langchain-core
+langchain-openai
+python-dotenv
+numpy
+pandas
+pillow
+matplotlib
+pinecone-client
+pinecone-text
+transformers
+torch
