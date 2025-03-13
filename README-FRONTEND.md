@@ -53,6 +53,35 @@ pnpm dev
 - The `.gitignore` file is configured to exclude `node_modules/` from Git
 - If you encounter Git issues with large files, ensure node_modules is completely removed from your Git history
 
+## Git Management
+
+### Best Practices
+
+- **Never commit build artifacts**: Both the `node_modules/` and `.next/` directories should remain excluded from version control
+- **Restoring files**: Use `git checkout HEAD <filename>` to restore a file to its last committed state (discards local changes)
+- **Cleaning untracked files**: Use `git clean -fd` to remove untracked files and directories (use with caution)
+
+### Common Git Operations
+
+```bash
+# See what files have changed
+git status
+
+# Discard changes to a specific file
+git checkout HEAD <filename>
+
+# Discard ALL uncommitted changes (careful!)
+git reset --hard HEAD
+
+# Remove a file from Git tracking while keeping the local file
+git rm --cached <filename>
+```
+
+### Environment Files
+
+- `.env` files containing sensitive information should be excluded from Git
+- Use `.env.example` as a template to show required environment variables
+
 ## Frontend Features
 
 - **Animated Background**: Beautiful particle animations in the background
@@ -128,6 +157,13 @@ export async function generateEmail(productUrl: string, clientUrl: string): Prom
 - **Lucide React**: Icon library
 - **Radix UI**: Accessible UI components
 
+### Development Workflow
+
+- Use TypeScript for type safety and better developer experience
+- Component architecture follows a common pattern with UI components in `/components/ui`
+- Leverage custom hooks for reusable logic
+- Use server components where appropriate for better performance
+
 ### Build and Deployment
 
 To build the application for production:
@@ -163,4 +199,8 @@ npm run dev
 - **Port Conflicts**: Check if port 5001 is available; change in `api_server.py` if needed
 - **Visualization Errors**: The backend uses a non-GUI matplotlib backend to avoid display issues
 - **Missing Dependencies**: If you encounter errors about missing modules, run `npm install` again
-- **Large File Git Issues**: If you encounter GitHub rejection due to large files, see the "Important Note on node_modules" section 
+- **Large File Git Issues**: If you encounter GitHub rejection due to large files:
+  - Remove node_modules from Git tracking: `git filter-branch --tree-filter 'rm -rf frontend/node_modules' --prune-empty HEAD`
+  - Force push changes: `git push -f origin main`
+- **Next.js Build Errors**: Try clearing the cache with `rm -rf .next` then rebuild
+- **Module Not Found Errors**: Make sure all imports use correct paths and all dependencies are installed 
