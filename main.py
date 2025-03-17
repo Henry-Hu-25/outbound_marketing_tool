@@ -140,7 +140,7 @@ def main(product_url=None, client_url=None, quiet=True):
 
     ## Key Competitive Advantages:
 
-    1. 120+ Years of Experience We have specialized in garment production for over two decades and have partnered with clients worldwide.
+    1. 20+ Years of Experience We have specialized in garment production for over two decades and have partnered with clients worldwide.
 
     2. Best Value via Supply Chain Advantage We can get the best prices from fabric and accessory suppliers offering the highest quality goods to deliver maximum value to clients.
 
