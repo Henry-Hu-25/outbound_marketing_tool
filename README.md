@@ -11,6 +11,8 @@ This project is an AI-Powered system for generating personalized sales outreach 
 - AI-powered email generation with **Groq** and **LangChain**
 - Email quality evaluation with **LLM-as-a-judge** in **LangSmith**
 
+![Cloud Build Log](https://drive.google.com/uc?id=1tN2JWJZ4uKlJvyosiMcbMgNLpaDZ-94T)
+
 ## Setup
 
 ### Backend
