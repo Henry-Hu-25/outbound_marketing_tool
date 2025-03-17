@@ -5,7 +5,7 @@ This project is an AI-Powered system for generating personalized sales outreach 
 ## Features
 
 - **Web scraping** to extract product and client information
-- Product image and description dense embedding using **CLIP** and technical specifications sparse embedding using **BM25**
+- Product image and detail dense embedding using **CLIP** and technical spec sparse embedding using **BM25**
 - **RAG** pipeline with **Pinecone** vector database and hybrid search (BM25 and CLIP)
 - Visualization of search results
 - AI-powered email generation with **Groq** and **LangChain**
