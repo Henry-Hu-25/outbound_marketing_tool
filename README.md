@@ -1,12 +1,12 @@
 # AI-Powered Sales Outreach System
 
-This project is an AI-Powered system for generating personalized sales outreach emails based on product and client information. It uses web scraping, RAG, and LLMs to create targeted sales communications, with LLM-as-a-judge for email quality evaluation. It's purposely built for a small garment exporter, Airry Garments, to automate their sales outreach process.
+This project is an AI-Powered system for generating personalized sales outreach emails based on product and client information. It uses web scraping, RAG, and LLMs to create targeted sales communications, with LLM-as-a-judge for email quality evaluation. It's purposely built for a garment exporter, Airry Garments Co., to automate their sales outreach process.
 
 ## Impact
 - Each email costs less than $0.20 to generate (generation + evaluation)
 - A sales rep would send out around 1,800 outreach emails per month. These emails would take about half of his/her time. 
 - A sales rep's base salary is around $2,000 per month (pre-commission)
-- This system can generate 1,800 emails per month at a cost of $360, representing a 2.8x cost saving
+- This system can generate 1,800 emails per month at a cost of $360, representing a **2.8x** cost saving
 
 
 ## Features
