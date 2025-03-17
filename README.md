@@ -1,17 +1,15 @@
-# Icebreaker - AI-Powered Sales Outreach System
+# AI-Powered Sales Outreach System
 
-This project is an AI-Powered system for generating personalized sales outreach emails based on product and client information. It uses web scraping, vector search, and language models to create targeted sales communications.
+This project is an AI-Powered system for generating personalized sales outreach emails based on product and client information. It uses web scraping, RAG, and LLMs to create targeted sales communications, with LLM-as-a-judge for email quality evaluation.
 
 ## Features
 
-- Web scraping to extract product and client information
-- Image and text embedding using CLIP model
-- Hybrid search using BM25 and CLIP embeddings
+- **Web scraping** to extract product and client information
+- Product image and description dense embedding using **CLIP** and technical specifications sparse embedding using **BM25**
+- **RAG** pipeline with **Pinecone** vector database and hybrid search (BM25 and CLIP)
 - Visualization of search results
-- AI-powered email generation
-- Email quality evaluation
-- Modern UI frontend with Next.js and React
-- Flask API server for frontend-backend communication
+- AI-powered email generation with **Groq** and **LangChain**
+- Email quality evaluation with **LLM-as-a-judge** in **LangSmith**
 
 ## Setup
 
@@ -23,8 +21,9 @@ This project is an AI-Powered system for generating personalized sales outreach 
    pip install -r requirements.txt
    ```
 3. Create a `.env` file with your API keys and configuration
-4. Place your inventory data in the `images` directory
-5. Run the API server:
+4. Update the prompt (company information) in `main.py` (or use the default one)
+5. Place your inventory data in the `images` directory (or use the default one)
+6. Run the API server:
    ```
    python api_server.py
    ```
@@ -49,7 +48,7 @@ See [README-FRONTEND.md](README-FRONTEND.md) for detailed frontend setup instruc
   - `visualization.py`: Result visualization with non-GUI output
   - `email_generator.py`: Email generation functionality
   - `evaluation.py`: Email evaluation functionality
-- `frontend/`: Next.js frontend application
+- `frontend/`: frontend application
 
 ## API Endpoints
 
