@@ -1,32 +1,21 @@
-# Icebreaker with Modern UI Frontend
+# Modern UI Frontend
 
 This project has been enhanced with a modern UI frontend built with Next.js, React, and Framer Motion.
-
-## Project Structure
-
-The project now includes:
-
-1. **Python Backend** - The original Icebreaker application with a Flask API server
-2. **Next.js Frontend** - A modern frontend in the `/frontend` directory with animated UI
-
-## Getting Started with the Frontend
 
 ### Prerequisites
 
 - Node.js (v14.0.0 or later)
 - npm, yarn, or pnpm
 
-### Setup
+# Getting Started
 
-1. Navigate to the frontend directory:
+### Installing Dependencies
 
 ```bash
+# Navigate to the frontend directory
 cd frontend
-```
 
-2. Install the dependencies:
-
-```bash
+# Install all dependencies
 npm install
 # or
 yarn install
@@ -34,55 +23,63 @@ yarn install
 pnpm install
 ```
 
-3. Start the development server:
+### Build and Deployment
+
+To build the application for production:
 
 ```bash
+npm run build
+# or
+yarn build
+```
+
+The build artifacts will be stored in the `.next/` directory, which should also not be committed to version control.
+
+### Running the Complete Application
+
+1. Start the Python backend API server:
+
+```bash
+python api_server.py
+```
+
+2. In a separate terminal, start the frontend:
+
+```bash
+cd frontend
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the animated UI.
+3. Access the application at [http://localhost:3000](http://localhost:3000)
 
-## Important Note on node_modules
 
-- The `node_modules` directory is automatically created when you run `npm install` and contains all the project dependencies
-- This directory is **large** (often hundreds of MB) and should **never** be committed to version control
-- The `.gitignore` file is configured to exclude `node_modules/` from Git
-- If you encounter Git issues with large files, ensure node_modules is completely removed from your Git history
+# Development Notes
 
-## Git Management
+### Project Structure
 
-### Best Practices
+The project now includes:
 
-- **Never commit build artifacts**: Both the `node_modules/` and `.next/` directories should remain excluded from version control
-- **Restoring files**: Use `git checkout HEAD <filename>` to restore a file to its last committed state (discards local changes)
-- **Cleaning untracked files**: Use `git clean -fd` to remove untracked files and directories (use with caution)
+1. **Python Backend** - The application with a Flask API server
+2. **Next.js Frontend** - A modern frontend in the `/frontend` directory with animated UI
 
-### Common Git Operations
+### Key Dependencies
 
-```bash
-# See what files have changed
-git status
+- **Next.js**: React framework for production
+- **React**: UI library
+- **Framer Motion**: Animation library
+- **Tailwind CSS**: Utility-first CSS framework
+- **next-themes**: Theme switching functionality
+- **Lucide React**: Icon library
+- **Radix UI**: Accessible UI components
 
-# Discard changes to a specific file
-git checkout HEAD <filename>
+### Development Workflow
 
-# Discard ALL uncommitted changes (careful!)
-git reset --hard HEAD
+- Use TypeScript for type safety and better developer experience
+- Component architecture follows a common pattern with UI components in `/components/ui`
+- Leverage custom hooks for reusable logic
+- Use server components where appropriate for better performance
 
-# Remove a file from Git tracking while keeping the local file
-git rm --cached <filename>
-```
-
-### Environment Files
-
-- `.env` files containing sensitive information should be excluded from Git
-- Use `.env.example` as a template to show required environment variables
-
-## Frontend Features
+### Frontend Features
 
 - **Animated Background**: Beautiful particle animations in the background
 - **Animated Text**: Text that animates in with staggered animation
@@ -95,9 +92,7 @@ git rm --cached <filename>
 - **Beautiful Typography**: Enhanced text formatting with proper spacing
 - **Error Handling**: User-friendly error messages
 
-## Email Output Enhancements
-
-The email output page has been improved with:
+### Email Output Enhancements
 
 - **Paragraph Spacing**: Proper spacing between paragraphs for readability
 - **Line Breaks**: Preserved line breaks within paragraphs
@@ -106,7 +101,7 @@ The email output page has been improved with:
 - **Animations**: Smooth text reveal animations using Framer Motion
 - **Responsive Layout**: Proper formatting on all screen sizes
 
-## Integrating with the Backend
+### Integrating with the Backend
 
 The frontend and backend are integrated via:
 
@@ -145,55 +140,7 @@ export async function generateEmail(productUrl: string, clientUrl: string): Prom
 }
 ```
 
-## Development Notes
-
-### Key Dependencies
-
-- **Next.js**: React framework for production
-- **React**: UI library
-- **Framer Motion**: Animation library
-- **Tailwind CSS**: Utility-first CSS framework
-- **next-themes**: Theme switching functionality
-- **Lucide React**: Icon library
-- **Radix UI**: Accessible UI components
-
-### Development Workflow
-
-- Use TypeScript for type safety and better developer experience
-- Component architecture follows a common pattern with UI components in `/components/ui`
-- Leverage custom hooks for reusable logic
-- Use server components where appropriate for better performance
-
-### Build and Deployment
-
-To build the application for production:
-
-```bash
-npm run build
-# or
-yarn build
-```
-
-The build artifacts will be stored in the `.next/` directory, which should also not be committed to version control.
-
-## Running the Complete Application
-
-1. Start the Python backend API server:
-
-```bash
-python api_server.py
-```
-
-2. In a separate terminal, start the frontend:
-
-```bash
-cd frontend
-npm run dev
-```
-
-3. Access the application at [http://localhost:3000](http://localhost:3000)
-
-## Troubleshooting
+### Troubleshooting
 
 - **API Connection Issues**: Ensure the Flask server is running on port 5001
 - **Port Conflicts**: Check if port 5001 is available; change in `api_server.py` if needed
@@ -204,3 +151,16 @@ npm run dev
   - Force push changes: `git push -f origin main`
 - **Next.js Build Errors**: Try clearing the cache with `rm -rf .next` then rebuild
 - **Module Not Found Errors**: Make sure all imports use correct paths and all dependencies are installed 
+
+# Additional Notes
+### Important Note on node_modules
+
+- The `node_modules` directory is automatically created when you run `npm install` and contains all the project dependencies
+- This directory is **large** (often hundreds of MB) and should **never** be committed to version control
+- The `.gitignore` file is configured to exclude `node_modules/` from Git
+- If you encounter Git issues with large files, ensure node_modules is completely removed from your Git history
+
+### Environment Files
+
+- `.env` files containing sensitive information should be excluded from Git
+- Use `.env.example` as a template to show required environment variables
