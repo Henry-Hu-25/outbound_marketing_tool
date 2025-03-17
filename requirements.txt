@@ -11,3 +11,5 @@ pinecone-client
 pinecone-text
 transformers
 torch
+flask
+flask-cors
